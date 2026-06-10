@@ -14,11 +14,18 @@ export async function sendContactNotification(params: {
     timeStyle: 'short',
   })
 
+  // Sanitize header fields to prevent injection
+  const safeName = sanitizeHeader(name)
+  const safeSubject = `New contact — ${safeName} via sav.works`
+  const safeReplyTo = isValidRfcEmail(email) ? email : undefined
+
+  const messageHtml = escapeHtml(message).replace(/\n/g, '<br>')
+
   const { data, error } = await getResend().emails.send({
     from: FROM,
     to: ['chahd@sav.works'],
-    subject: `New contact — ${name} via sav.works`,
-    replyTo: email,
+    subject: safeSubject,
+    replyTo: safeReplyTo,
     html: [
       `<!doctype html>`,
       `<html>`,
@@ -69,7 +76,7 @@ export async function sendContactNotification(params: {
       // Message
       `<tr>`,
       `<td width="80" style="font-size:13px;font-weight:600;color:#78716c;vertical-align:top;padding-bottom:4px;">Message</td>`,
-      `<td style="font-size:15px;color:#292524;line-height:1.6;white-space:pre-wrap;">${escapeHtml(message)}</td>`,
+      `<td style="font-size:15px;color:#292524;line-height:1.6;">${messageHtml}</td>`,
       `</tr>`,
 
       `</table>`,
@@ -129,6 +136,18 @@ function escapeHtml(str: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;')
+}
+
+/** Strip newlines and control characters from header-bound strings */
+function sanitizeHeader(str: string): string {
+  return str.replace(/[\x00-\x1f\x7f\r\n]/g, '').trim()
+}
+
+/** Basic RFC 5322-ish email validation for replyTo safety */
+const RFC_EMAIL_RE = /^[^\s<>()\[\]\\.,;:\x00-\x1f\x7f]+@[^\s<>()\[\]\\.,;:\x00-\x1f\x7f]+\.[a-zA-Z]{2,}$/
+
+function isValidRfcEmail(str: string): boolean {
+  return RFC_EMAIL_RE.test(str) && str.length <= 320
 }
 
 export async function sendTestEmail() {
