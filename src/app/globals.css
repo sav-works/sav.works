@@ -2,17 +2,23 @@
 
 @theme {
   --color-zinc-950: #0a0a0b;
+  --color-zinc-925: #0e0e10;
   --color-zinc-900: #121214;
+  --color-zinc-850: #18181d;
   --color-zinc-800: #1e1e24;
+  --color-zinc-700: #2a2a34;
+  --color-zinc-500: #5a5a6e;
   --color-zinc-400: #88889a;
+  --color-zinc-300: #b0b0c0;
   --color-zinc-100: #e8e8ed;
+  --color-violet-500: #8b5cf6;
   --color-violet-400: #a78bfa;
-  --color-violet-400\/10: rgba(167, 139, 250, 0.1);
-  --color-violet-400\/20: rgba(167, 139, 250, 0.2);
-  --color-violet-400\/25: rgba(167, 139, 250, 0.25);
-  --color-violet-400\/30: rgba(167, 139, 250, 0.3);
-  --color-violet-400\/50: rgba(167, 139, 250, 0.5);
+  --color-violet-300: #c4b5fd;
   --color-indigo-400: #6366f1;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-emerald-400: #34d399;
+  --color-rose-400: #fb7185;
 }
 
 html {
@@ -23,4 +29,26 @@ body {
   min-height: 100vh;
   background-color: var(--color-zinc-950);
   color: var(--color-zinc-100);
+}
+
+/* Subtle grid background */
+.bg-grid {
+  background-image: linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glow effect for O-E-A-L */
+.glow-violet {
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.15), 0 0 120px rgba(139, 92, 246, 0.05);
+}
+
+/* Smooth fade-in on scroll */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
 }
