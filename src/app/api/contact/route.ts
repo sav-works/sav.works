@@ -102,6 +102,7 @@ export async function POST(req: Request) {
     const { name, email, message } = body
 
     // Honeypot check — if filled, silently accept (bots think they won)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((body as any)._hp) {
       return NextResponse.json({ success: true })
     }
@@ -120,11 +121,9 @@ export async function POST(req: Request) {
 
     // 4. Save to Supabase (service role bypasses RLS)
     const supabase = createServiceRoleClient()
-    const { error: dbError } = await supabase.from('contacts').insert({
-      name: clean.name,
-      email: clean.email,
-      message: clean.message,
-    } as any)
+    const { error: dbError } = await supabase
+      .from('contacts')
+      .insert({ name: clean.name, email: clean.email, message: clean.message })
 
     if (dbError) {
       console.error('Supabase insert error:', dbError)
