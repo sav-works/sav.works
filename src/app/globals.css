@@ -1,25 +1,107 @@
 @import "tailwindcss";
 
+/* ─── Design System ──────────────────────────────────────────── */
+
 @theme {
-  --color-zinc-950: #0a0a0b;
-  --color-zinc-925: #0e0e10;
-  --color-zinc-900: #121214;
-  --color-zinc-850: #18181d;
-  --color-zinc-800: #1e1e24;
-  --color-zinc-700: #2a2a34;
-  --color-zinc-500: #5a5a6e;
-  --color-zinc-400: #88889a;
-  --color-zinc-300: #b0b0c0;
-  --color-zinc-100: #e8e8ed;
-  --color-violet-500: #8b5cf6;
-  --color-violet-400: #a78bfa;
-  --color-violet-300: #c4b5fd;
-  --color-indigo-400: #6366f1;
-  --color-amber-400: #fbbf24;
-  --color-amber-500: #f59e0b;
-  --color-emerald-400: #34d399;
+  /* Background palette — warm dark, not cold black */
+  --color-sav-950: #0a0a0f;
+  --color-sav-925: #0e0e14;
+  --color-sav-900: #121216;
+  --color-sav-850: #18181e;
+  --color-sav-800: #1e1e26;
+  --color-sav-700: #282830;
+  --color-sav-600: #34343e;
+
+  /* Text palette */
+  --color-sav-100: #f4f4f5;
+  --color-sav-200: #e4e4e7;
+  --color-sav-300: #c0c0c8;
+  --color-sav-400: #a1a1aa;
+  --color-sav-500: #71717a;
+
+  /* Brand accent — violet */
+  --color-brand-600: #7c3aed;
+  --color-brand-500: #8b5cf6;
+  --color-brand-400: #a78bfa;
+  --color-brand-300: #c4b5fd;
+  --color-brand-200: #ddd6fe;
+  --color-brand-100: #ede9fe;
+
+  /* O-E-A-L accent palette */
+  --color-o-violet: #a78bfa;
+  --color-e-indigo: #6366f1;
+  --color-a-emerald: #34d399;
+  --color-l-amber: #fbbf24;
+
+  /* Semantic */
   --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+
+  /* Animation tokens */
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-fade-up-sm: fade-up 0.4s ease-out forwards;
+  --animate-fade-up-lg: fade-up 0.8s ease-out forwards;
+  --animate-scale-in: scale-in 0.4s ease-out forwards;
+  --animate-slide-left: slide-left 0.6s ease-out forwards;
+  --animate-slide-right: slide-right 0.6s ease-out forwards;
+  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+  --animate-glow-rotate: glow-rotate 8s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-stagger-fade: fade-up 0.5s ease-out forwards;
+
+  /* Shadows */
+  --shadow-glow-sm: 0 0 20px rgba(139, 92, 246, 0.1);
+  --shadow-glow-md: 0 0 40px rgba(139, 92, 246, 0.15);
+  --shadow-glow-lg: 0 0 60px rgba(139, 92, 246, 0.2);
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 0 0 1px rgba(139, 92, 246, 0.15), 0 4px 20px rgba(0, 0, 0, 0.3);
 }
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes glow-rotate {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  33% { transform: translate(-50%, -50%) rotate(120deg); }
+  66% { transform: translate(-50%, -50%) rotate(240deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ─── Base ────────────────────────────────────────────────────── */
 
 html {
   scroll-behavior: smooth;
@@ -27,28 +109,103 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: var(--color-zinc-950);
-  color: var(--color-zinc-100);
+  background-color: var(--color-sav-950);
+  color: var(--color-sav-100);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ─── Utility classes ─────────────────────────────────────────── */
 
 /* Subtle grid background */
 .bg-grid {
-  background-image: linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* Glow effect for O-E-A-L */
+/* Glassmorphism panel */
+.glass {
+  background: rgba(18, 18, 22, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Gradient text */
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--color-brand-400), var(--color-brand-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient border card */
+.card-border-gradient {
+  position: relative;
+  border-radius: 1rem;
+}
+
+.card-border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.1), transparent 50%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glow effect */
 .glow-violet {
-  box-shadow: 0 0 60px rgba(139, 92, 246, 0.15), 0 0 120px rgba(139, 92, 246, 0.05);
+  box-shadow:
+    0 0 60px rgba(139, 92, 246, 0.12),
+    0 0 120px rgba(139, 92, 246, 0.04);
 }
 
-/* Smooth fade-in on scroll */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Stagger animation helper — set --i on each element */
+.stagger-fade {
+  animation: fade-up 0.5s ease-out forwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+  opacity: 0;
 }
 
-.animate-fade-up {
-  animation: fade-up 0.6s ease-out forwards;
+/* Scroll-reveal (used with Intersection Observer) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Selection */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: white;
+}
+
+/* Scrollbar — subtle, on-brand */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sav-700);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sav-600);
 }

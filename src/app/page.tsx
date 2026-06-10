@@ -7,13 +7,13 @@ import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <main className="max-w-[880px] mx-auto px-6">
+    <>
       <Nav />
       <Hero />
       <Vision />
       <Services />
       <Contact />
       <Footer />
-    </main>
+    </>
   )
 }
