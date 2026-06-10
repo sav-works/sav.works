@@ -1,36 +1,38 @@
+'use client'
+
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-grid pt-16">
-      {/* Ambient glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-violet-500/10 blur-[120px]" />
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-indigo-500/8 blur-[100px]" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Light ambient background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-gradient-to-br from-brand-100/60 via-brand-50/40 to-transparent blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-brand-200/30 via-brand-50/20 to-transparent blur-[80px]" />
+      </div>
 
-      <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 text-xs text-zinc-400 border border-zinc-800 px-4 py-1.5 rounded-full mb-10">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          Angels Company — now live
-        </div>
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
 
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         {/* Headline */}
-        <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-[0.95] mb-6">
-          Operations
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6 text-sav-950 animate-fade-up">
+          Build systems that
           <br />
-          <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-violet-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 bg-clip-text text-transparent">
             handle more.
           </span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-          AI-powered systems, automated content pipelines, and digital infrastructure
+        {/* Subtitle */}
+        <p className="text-lg text-sav-500 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up" style={{ animationDelay: '0.15s' }}>
+          AI-powered operations, content automation, and digital infrastructure
           — built so you can scale without the overhead.
         </p>
 
-        {/* CTA */}
-        <div className="flex gap-4 justify-center flex-wrap">
+        {/* CTAs */}
+        <div className="flex gap-4 justify-center flex-wrap animate-fade-up" style={{ animationDelay: '0.3s' }}>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm bg-gradient-to-r from-violet-500 to-indigo-500 text-white hover:opacity-90 hover:scale-[1.02] transition-all shadow-lg shadow-violet-500/20"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm bg-brand-600 text-white hover:bg-brand-700 hover:shadow-lg hover:shadow-brand-500/20 transition-all duration-200"
           >
             Start the conversation
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -38,28 +40,11 @@ export default function Hero() {
             </svg>
           </a>
           <a
-            href="#vision"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm bg-zinc-900 text-zinc-100 border border-zinc-800 hover:border-violet-500/50 hover:text-violet-400 transition-all"
+            href="#services"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm text-sav-600 bg-white border border-sav-200 hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50 transition-all duration-200 shadow-sm"
           >
-            Our vision
+            Our services
           </a>
-        </div>
-
-        {/* O-E-A-L letters */}
-        <div className="mt-20 flex justify-center gap-6 sm:gap-10">
-          {['O', 'E', 'A', 'L'].map((letter, i) => (
-            <div
-              key={letter}
-              className="w-14 h-14 sm:w-18 sm:h-18 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-2xl sm:text-3xl font-bold tracking-tight"
-              style={{
-                color: ['#a78bfa', '#6366f1', '#34d399', '#fbbf24'][i],
-                borderColor: ['#a78bfa/20', '#6366f1/20', '#34d399/20', '#fbbf24/20'][i],
-                animationDelay: `${i * 0.1}s`,
-              }}
-            >
-              {letter}
-            </div>
-          ))}
         </div>
       </div>
     </section>

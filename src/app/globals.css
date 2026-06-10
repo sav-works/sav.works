@@ -1,25 +1,90 @@
 @import "tailwindcss";
 
+/* ─── Design System: Light, Clean, Premium ─────────────────── */
+
 @theme {
-  --color-zinc-950: #0a0a0b;
-  --color-zinc-925: #0e0e10;
-  --color-zinc-900: #121214;
-  --color-zinc-850: #18181d;
-  --color-zinc-800: #1e1e24;
-  --color-zinc-700: #2a2a34;
-  --color-zinc-500: #5a5a6e;
-  --color-zinc-400: #88889a;
-  --color-zinc-300: #b0b0c0;
-  --color-zinc-100: #e8e8ed;
-  --color-violet-500: #8b5cf6;
-  --color-violet-400: #a78bfa;
-  --color-violet-300: #c4b5fd;
-  --color-indigo-400: #6366f1;
+  /* Background palette — clean white with warm undertones */
+  --color-sav-50: #faf9fe;
+  --color-sav-100: #f1f0f9;
+  --color-sav-200: #e2e0f0;
+  --color-sav-300: #c5c2e0;
+  --color-sav-400: #9e9ab8;
+  --color-sav-500: #7c7896;
+  --color-sav-600: #5c5874;
+
+  /* Text palette */
+  --color-sav-700: #353248;
+  --color-sav-800: #242238;
+  --color-sav-900: #16142a;
+  --color-sav-950: #0d0b1a;
+
+  /* Brand — deep violet */
+  --color-brand-50: #f5f3ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-300: #c4b5fd;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+
+  /* Accent green (for success, badges) */
+  --color-green-400: #34d399;
+  --color-green-500: #10b981;
+
+  /* Accent amber (for highlights) */
   --color-amber-400: #fbbf24;
-  --color-amber-500: #f59e0b;
-  --color-emerald-400: #34d399;
+
+  /* Rose (for errors) */
   --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+
+  /* Animation tokens */
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-fade-up-sm: fade-up 0.4s ease-out forwards;
+  --animate-scale-in: scale-in 0.4s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+
+  /* Shadows — premium, blue-tinted like Stripe */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 10px 25px -5px rgba(124, 58, 237, 0.08), 0 4px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.15);
 }
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ─── Base ────────────────────────────────────────────────────── */
 
 html {
   scroll-behavior: smooth;
@@ -27,28 +92,53 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: var(--color-zinc-950);
-  color: var(--color-zinc-100);
+  background: linear-gradient(180deg, #faf9fe 0%, #ffffff 100%);
+  color: var(--color-sav-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Subtle grid background */
+/* ─── Utility classes ─────────────────────────────────────────── */
+
+/* Gradient text */
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--color-brand-600), var(--color-brand-500), var(--color-brand-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle grid overlay */
 .bg-grid {
-  background-image: linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
 }
 
-/* Glow effect for O-E-A-L */
-.glow-violet {
-  box-shadow: 0 0 60px rgba(139, 92, 246, 0.15), 0 0 120px rgba(139, 92, 246, 0.05);
+/* Glass card (light version) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
 }
 
-/* Smooth fade-in on scroll */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.animate-fade-up {
-  animation: fade-up 0.6s ease-out forwards;
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Selection */
+::selection {
+  background: rgba(139, 92, 246, 0.2);
+  color: var(--color-sav-900);
 }
