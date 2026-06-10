@@ -92,6 +92,7 @@ describe('validate()', () => {
   })
 
   it('rejects non-string name', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect(validate({ name: [] as any, email: 'a@b.com', message: 'Hi' })).toBe('Name is required.')
   })
 

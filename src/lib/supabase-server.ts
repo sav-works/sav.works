@@ -29,7 +29,7 @@ export async function createServerSupabaseClient() {
  * Bypasses RLS — use only in API routes for admin operations.
  */
 export function createServiceRoleClient() {
-  return createClient<Database>(
+  return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_KEY!,
   )

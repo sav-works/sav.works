@@ -1,4 +1,4 @@
-import resend from './resend'
+import getResend from './resend'
 
 const FROM = 'Chahd <chahd@sav.works>'
 
@@ -9,7 +9,7 @@ export async function sendContactNotification(params: {
 }) {
   const { name, email, message } = params
 
-  const { data, error } = await resend.emails.send({
+  const { data, error } = await getResend().emails.send({
     from: FROM,
     to: ['chahd@sav.works'],
     subject: `New contact from ${name}`,
@@ -33,7 +33,7 @@ export async function sendContactNotification(params: {
 }
 
 export async function sendTestEmail() {
-  const { data, error } = await resend.emails.send({
+  const { data, error } = await getResend().emails.send({
     from: FROM,
     to: ['hamamyshahd@gmail.com'],
     subject: 'sav.works — System test',

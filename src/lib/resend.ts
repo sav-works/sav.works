@@ -1,5 +1,16 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY!)
+let client: Resend | null = null
 
-export default resend
+export function getResend(): Resend {
+  if (!client) {
+    const key = process.env.RESEND_API_KEY
+    if (!key) {
+      throw new Error('Missing RESEND_API_KEY environment variable')
+    }
+    client = new Resend(key)
+  }
+  return client
+}
+
+export default getResend
