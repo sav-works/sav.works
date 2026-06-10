@@ -6,7 +6,7 @@ export default function Footer() {
           <span className="text-lg font-bold tracking-tight text-gradient-brand">
             sav
           </span>
-          <span className="text-sav-300 font-normal">.works</span>
+          <span className="text-sav-500 font-normal">.works</span>
         </div>
 
         <div className="flex items-center gap-6">
@@ -14,14 +14,14 @@ export default function Footer() {
             <a
               key={label}
               href={`#${label.toLowerCase()}`}
-              className="text-sm text-sav-400 hover:text-brand-600 transition-colors"
+              className="text-sm text-sav-600 hover:text-brand-600 transition-colors"
             >
               {label}
             </a>
           ))}
         </div>
 
-        <p className="text-sm text-sav-400">
+        <p className="text-sm text-sav-500">
           sav.works &middot; {new Date().getFullYear()}
         </p>
       </div>

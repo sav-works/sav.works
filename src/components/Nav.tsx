@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 const links = [
   { label: 'Services', href: '#services' },
@@ -29,12 +30,12 @@ export default function Nav() {
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16 sm:h-18">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-1 group">
+        <Link href="/" className="flex items-center gap-1 group">
           <span className="text-2xl font-extrabold tracking-tight text-gradient-brand">
             sav
           </span>
           <span className="text-sm text-sav-400 font-normal">.works</span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center gap-1">
