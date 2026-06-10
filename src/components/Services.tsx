@@ -12,8 +12,7 @@ const services = [
     label: 'AI agents & automation',
     desc: 'Custom agent systems, content pipelines, and decision engines that work 24/7.',
     points: ['Custom GPT & agent pipelines', 'Automated content generation', 'Decision engines & routing'],
-    gradient: 'from-brand-500/20 to-brand-400/20',
-    accent: '#8b5cf6',
+    color: '#7c3aed',
   },
   {
     icon: (
@@ -24,8 +23,7 @@ const services = [
     label: 'Digital operations',
     desc: 'Infrastructure, deployment, monitoring, and workflow orchestration — the backbone.',
     points: ['Cloud infrastructure & DevOps', 'Monitoring & observability', 'Workflow orchestration'],
-    gradient: 'from-indigo-500/20 to-violet-500/20',
-    accent: '#6366f1',
+    color: '#6366f1',
   },
   {
     icon: (
@@ -36,8 +34,7 @@ const services = [
     label: 'Content at scale',
     desc: 'Automated Instagram workflows, media pipelines, and brand systems that post while you build.',
     points: ['Instagram automation workflows', 'Media pipeline management', 'Brand system templates'],
-    gradient: 'from-emerald-500/20 to-teal-500/20',
-    accent: '#34d399',
+    color: '#10b981',
   },
   {
     icon: (
@@ -48,25 +45,17 @@ const services = [
     label: 'Strategy & consulting',
     desc: 'AI investment models, business logic, and tech stack decisions that actually move the needle.',
     points: ['AI investment strategy', 'Tech stack architecture', 'Process optimization'],
-    gradient: 'from-amber-500/20 to-orange-500/20',
-    accent: '#fbbf24',
+    color: '#f59e0b',
   },
 ]
 
-function ServiceCard({
-  s,
-  index,
-}: {
-  s: (typeof services)[0]
-  index: number
-}) {
+function ServiceCard({ s, index }: { s: (typeof services)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -83,44 +72,33 @@ function ServiceCard({
   return (
     <div
       ref={ref}
-      className="group relative rounded-2xl p-7 border border-white/[0.06] bg-sav-900/30 hover:bg-sav-900/60 hover:border-white/[0.10] transition-all duration-500"
+      className="group relative rounded-2xl p-7 bg-white border border-sav-200 hover:border-brand-200 hover:shadow-card-hover transition-all duration-500"
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(24px)',
-        transition: `all 0.6s ease-out ${index * 0.12}s`,
+        transform: visible ? 'translateY(0)' : 'translateY(20px)',
+        transition: `all 0.5s ease-out ${index * 0.1}s`,
       }}
     >
       {/* Icon */}
       <div
-        className={`w-11 h-11 rounded-xl flex items-center justify-center bg-gradient-to-br ${s.gradient} mb-4 text-sav-100 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}
-        style={{ boxShadow: visible ? `0 0 20px ${s.accent}15` : 'none' }}
+        className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 text-white transition-all duration-300 group-hover:scale-110"
+        style={{ backgroundColor: s.color }}
       >
         {s.icon}
       </div>
 
-      <h3 className="text-lg font-bold mb-2 tracking-tight text-sav-200">{s.label}</h3>
-      <p className="text-sm text-sav-400 leading-relaxed mb-4">{s.desc}</p>
+      <h3 className="text-lg font-bold mb-2 tracking-tight text-sav-900">{s.label}</h3>
+      <p className="text-sm text-sav-500 leading-relaxed mb-4">{s.desc}</p>
 
       {/* Bullet points */}
       <ul className="space-y-1.5">
         {s.points.map((pt) => (
-          <li key={pt} className="flex items-center gap-2 text-xs text-sav-500">
-            <span
-              className="w-1 h-1 rounded-full flex-shrink-0"
-              style={{ backgroundColor: s.accent }}
-            />
+          <li key={pt} className="flex items-center gap-2 text-xs text-sav-400">
+            <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: s.color }} />
             {pt}
           </li>
         ))}
       </ul>
-
-      {/* Hover accent line at bottom */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-3/4 h-px transition-all duration-500"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${s.accent}40, transparent)`,
-        }}
-      />
     </div>
   )
 }
@@ -146,10 +124,8 @@ export default function Services() {
   }, [])
 
   return (
-    <section id="services" className="py-32 px-6 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-sav-950 via-sav-925/50 to-sav-950 pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto relative z-10">
+    <section id="services" className="py-28 px-6 relative">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div
           ref={headerRef}
@@ -160,7 +136,7 @@ export default function Services() {
             transition: 'all 0.6s ease-out',
           }}
         >
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-sav-200">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-sav-900">
             What we do
           </h2>
           <p className="text-sav-400 max-w-xl mx-auto">

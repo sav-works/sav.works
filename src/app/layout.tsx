@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'sav.works — Build systems that handle more.',
     description:
-      'Angels Company builds AI-powered operations, content automation, and digital infrastructure. sav.works — handle more.',
+      'Angels Company builds AI-powered operations, content automation, and digital infrastructure.',
     siteName: 'sav.works',
     type: 'website',
     url: 'https://sav.works',
@@ -58,7 +58,7 @@ export default function RootLayout({
           gtag('config', 'G-YQZPQXE0K5');
         `}
       </Script>
-      <body className="font-sans antialiased bg-sav-950 text-sav-100 selection:bg-brand-500/30 selection:text-white">
+      <body className="font-sans antialiased selection:bg-brand-200 selection:text-sav-900">
         <PHProvider>{children}</PHProvider>
       </body>
     </html>
