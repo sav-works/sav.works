@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://eu.i.posthog.com",
+  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://eu.i.posthog.com https://js-de.sentry-cdn.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://eu.i.posthog.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://eu.i.posthog.com https://egwxscwpfwuerrxghmnf.supabase.co https://www.google-analytics.com https://www.googletagmanager.com",
+  "connect-src 'self' https://eu.i.posthog.com https://egwxscwpfwuerrxghmnf.supabase.co https://www.google-analytics.com https://www.googletagmanager.com https://o4511541335556096.ingest.de.sentry.io",
   "frame-src 'none'",
   "object-src 'none'",
   "base-uri 'self'",
@@ -37,4 +38,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  org: "sav-works",
+  project: "sav-works-website",
+  silent: !process.env.CI,
+});
