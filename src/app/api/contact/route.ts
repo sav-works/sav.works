@@ -37,6 +37,7 @@ const ALLOWED_ORIGINS = [
   'https://sav.works',
   'https://www.sav.works',
   /^https:\/\/sav-works\.vercel\.app$/,
+  /^https:\/\/sav-works-.+sav-dot-works\.vercel\.app$/,
   /^http:\/\/localhost:\d+$/,
 ]
 
