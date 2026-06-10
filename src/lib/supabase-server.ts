@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import type { Database } from '@/types/supabase'
 
@@ -20,5 +21,16 @@ export async function createServerSupabaseClient() {
         },
       },
     }
+  )
+}
+
+/**
+ * Server-only Supabase client using the service_role key.
+ * Bypasses RLS — use only in API routes for admin operations.
+ */
+export function createServiceRoleClient() {
+  return createClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_KEY!,
   )
 }
