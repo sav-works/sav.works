@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { createServiceRoleClient } from '@/lib/supabase-server'
 import { sendContactNotification } from '@/lib/email'
+import * as Sentry from '@sentry/nextjs'
 
 // ── Rate limiting ──────────────────────────────────────────────
 const RATE_LIMIT_WINDOW = 60_000        // 1 minute
@@ -117,8 +118,8 @@ export async function POST(req: Request) {
       message: sanitize(message!),
     }
 
-    // 4. Save to Supabase
-    const supabase = await createServerSupabaseClient()
+    // 4. Save to Supabase (service role bypasses RLS)
+    const supabase = createServiceRoleClient()
     const { error: dbError } = await supabase.from('contacts').insert({
       name: clean.name,
       email: clean.email,
@@ -127,6 +128,9 @@ export async function POST(req: Request) {
 
     if (dbError) {
       console.error('Supabase insert error:', dbError)
+      Sentry.captureException(dbError, {
+        tags: { source: 'contact-form', operation: 'supabase-insert' },
+      })
       // Still send email even if DB fails (degraded mode)
     }
 
@@ -139,12 +143,18 @@ export async function POST(req: Request) {
       })
     } catch (emailError) {
       console.error('Email send error:', emailError)
+      Sentry.captureException(emailError, {
+        tags: { source: 'contact-form', operation: 'email-notification' },
+      })
       // Don't fail the request — user gets success but we get notified
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Contact API error:', error)
+    Sentry.captureException(error, {
+      tags: { source: 'contact-form', operation: 'api-route' },
+    })
     return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 })
   }
 }
