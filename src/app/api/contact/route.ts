@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { sendContactNotification } from '@/lib/email'
 
 export async function POST(req: Request) {
   try {
@@ -13,25 +14,26 @@ export async function POST(req: Request) {
       )
     }
 
+    // Save to Supabase
     const supabase = await createServerSupabaseClient()
 
-    const { error } = await supabase
+    const { error: dbError } = await supabase
       .from('contacts')
       .insert({ name, email, message } as any)
 
-    if (error) {
-      console.error('Supabase insert error:', error)
-      return NextResponse.json(
-        { error: 'Failed to save message.' },
-        { status: 500 }
-      )
+    if (dbError) {
+      console.error('Supabase insert error:', dbError)
     }
 
+    // Send email notification via Resend
+    await sendContactNotification({ name, email, message })
+
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (error) {
+    console.error('Contact API error:', error)
     return NextResponse.json(
-      { error: 'Invalid request.' },
-      { status: 400 }
+      { error: 'Something went wrong.' },
+      { status: 500 }
     )
   }
 }
