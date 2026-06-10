@@ -63,6 +63,8 @@ export default function Nav() {
           onClick={() => setMobileOpen(!mobileOpen)}
           className="sm:hidden relative w-8 h-8 flex items-center justify-center"
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
         >
           <div className="flex flex-col gap-1.5">
             <span className={`block w-5 h-0.5 bg-sav-700 rounded transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-[3px]' : ''}`} />
@@ -73,7 +75,9 @@ export default function Nav() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`sm:hidden transition-all duration-300 overflow-hidden ${mobileOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div
+        id="mobile-menu"
+        className={`sm:hidden transition-all duration-300 overflow-hidden ${mobileOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-6 pb-6 pt-2 space-y-1 bg-white/95 backdrop-blur-xl border-b border-sav-200 shadow-sm">
           {links.map((l) => (
             <a

@@ -1,14 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 export default function Hero() {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Light ambient background */}
@@ -21,26 +13,8 @@ export default function Hero() {
       <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        {/* Badge */}
-        <div
-          className="inline-flex items-center gap-2 text-xs text-sav-500 bg-white/80 border border-sav-200 px-4 py-1.5 rounded-full mb-8 shadow-sm"
-          style={{
-            animation: mounted ? 'fade-up 0.5s ease-out forwards' : 'none',
-            opacity: mounted ? 1 : 0,
-          }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-soft" />
-          sav.works
-        </div>
-
         {/* Headline */}
-        <h1
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6 text-sav-950"
-          style={{
-            animation: mounted ? 'fade-up 0.6s ease-out 0.1s forwards' : 'none',
-            opacity: mounted ? 1 : 0,
-          }}
-        >
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6 text-sav-950 animate-fade-up">
           Build systems that
           <br />
           <span className="bg-gradient-to-r from-brand-600 via-brand-500 to-brand-400 bg-clip-text text-transparent">
@@ -49,25 +23,13 @@ export default function Hero() {
         </h1>
 
         {/* Subtitle */}
-        <p
-          className="text-lg text-sav-500 max-w-2xl mx-auto mb-12 leading-relaxed"
-          style={{
-            animation: mounted ? 'fade-up 0.6s ease-out 0.2s forwards' : 'none',
-            opacity: mounted ? 1 : 0,
-          }}
-        >
+        <p className="text-lg text-sav-500 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up" style={{ animationDelay: '0.15s' }}>
           AI-powered operations, content automation, and digital infrastructure
           — built so you can scale without the overhead.
         </p>
 
         {/* CTAs */}
-        <div
-          className="flex gap-4 justify-center flex-wrap"
-          style={{
-            animation: mounted ? 'fade-up 0.6s ease-out 0.3s forwards' : 'none',
-            opacity: mounted ? 1 : 0,
-          }}
-        >
+        <div className="flex gap-4 justify-center flex-wrap animate-fade-up" style={{ animationDelay: '0.3s' }}>
           <a
             href="#contact"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm bg-brand-600 text-white hover:bg-brand-700 hover:shadow-lg hover:shadow-brand-500/20 transition-all duration-200"

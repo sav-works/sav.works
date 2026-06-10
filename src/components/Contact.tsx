@@ -48,7 +48,9 @@ export default function Contact() {
         setSubmittedEmail(email)
         setStatus('success')
         setName(''); setEmail(''); setMessage('')
-        posthog?.capture('contact_form_submitted', { name, email })
+        posthog?.capture('contact_form_submitted', {
+          email_domain: email.trim().split('@')[1] ?? 'unknown',
+        })
       } else {
         setStatus('error')
       }
@@ -83,7 +85,10 @@ export default function Contact() {
         <div className="max-w-2xl mx-auto">
           <div className="bg-white border border-sav-200 rounded-2xl p-8 sm:p-10 shadow-card">
             {status === 'success' ? (
-              <div className="text-center py-8" style={{ animation: 'fade-up 0.5s ease-out forwards' }}>
+              <div
+                role="status"
+                aria-live="polite"
+                className="text-center py-8" style={{ animation: 'fade-up 0.5s ease-out forwards' }}>
                 <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
                   <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -156,7 +161,7 @@ export default function Contact() {
                 </div>
 
                 {status === 'error' && (
-                  <p className="text-sm text-rose-500 text-center">
+                  <p role="alert" className="text-sm text-rose-500 text-center">
                     Something went wrong. Try again or email{' '}
                     <a href="mailto:chahd@sav.works" className="underline hover:text-rose-600">chahd@sav.works</a>
                   </p>
