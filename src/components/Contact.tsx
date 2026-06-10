@@ -7,6 +7,7 @@ export default function Contact() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [honeypot, setHoneypot] = useState('') // hidden — bots fill this, humans don't
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const posthog = usePostHog()
 
@@ -20,7 +21,12 @@ export default function Contact() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+          _hp: honeypot, // bots fill this
+        }),
       })
 
       const data = await res.json()
@@ -28,9 +34,13 @@ export default function Contact() {
       if (data.success) {
         setStatus('success')
         posthog?.capture('contact_form_submitted', { name, email })
+        // Keep the submitted email for the success message
+        const submittedEmail = email
         setName('')
         setEmail('')
         setMessage('')
+        // Overwrite email state with the submitted value for success display
+        setEmail(submittedEmail)
       } else {
         setStatus('error')
       }
@@ -74,6 +84,19 @@ export default function Contact() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot — invisible to humans, bots fill it */}
+              <div aria-hidden="true" className="absolute opacity-0 pointer-events-none" style={{ height: 0, overflow: 'hidden' }}>
+                <label htmlFor="_hp">Leave this empty</label>
+                <input
+                  id="_hp"
+                  name="_hp"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
