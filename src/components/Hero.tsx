@@ -30,7 +30,7 @@ export default function Hero() {
           }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse-soft" />
-          Angels Company
+          sav.works
         </div>
 
         {/* Headline */}

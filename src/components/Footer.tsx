@@ -22,7 +22,7 @@ export default function Footer() {
         </div>
 
         <p className="text-sm text-sav-400">
-          Angels Company &middot; {new Date().getFullYear()}
+          sav.works &middot; {new Date().getFullYear()}
         </p>
       </div>
     </footer>

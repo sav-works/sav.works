@@ -20,11 +20,11 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'sav.works — Build systems that handle more.',
   description:
-    'Angels Company builds AI-powered operations, content automation, and digital infrastructure. sav.works — handle more.',
+    'AI-powered operations, content automation, and digital infrastructure. sav.works — handle more.',
   openGraph: {
     title: 'sav.works — Build systems that handle more.',
     description:
-      'Angels Company builds AI-powered operations, content automation, and digital infrastructure.',
+      'AI-powered operations, content automation, and digital infrastructure.',
     siteName: 'sav.works',
     type: 'website',
     url: 'https://sav.works',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'sav.works — Build systems that handle more.',
     description:
-      'Angels Company — AI-powered operations, content automation, and digital infrastructure.',
+      'AI-powered operations, content automation, and digital infrastructure.',
   },
   robots: { index: true, follow: true },
   metadataBase: new URL('https://sav.works'),
